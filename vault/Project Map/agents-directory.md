@@ -2,12 +2,12 @@
 
 ## Overview
 
-התיקייה מכילה קובץ `.md` לכל אחד מהסוכנים בצוות ([[yael]], [[yuval]], [[chen]]), עם YAML frontmatter שמגדיר את התפקיד, תיאור (`description`), הכלים המותרים (`tools`), והמודל. **מצב נוכחי (2026-05-13):** `yael.md` ו-`yuval.md` נכתבו ופועלים; `chen.md` עדיין לא נוצר (עד שיתבקש). **משויך:** [[reuven]] אחראי על האדריכלות; כל סוכן יקבל את הקובץ שלו.
+התיקייה מכילה קובץ `.md` לכל אחד מהסוכנים בצוות ([[yael]], [[yuval]], [[chen]]), עם YAML frontmatter שמגדיר את התפקיד, תיאור (`description`), הכלים המותרים (`tools`), והמודל. **מצב נוכחי (2026-05-13):** שלושת ה-agents (`yael.md`, `yuval.md`, `chen.md`) נכתבו ופועלים. **משויך:** [[reuven]] אחראי על האדריכלות; כל סוכן מחזיק את הקובץ שלו.
 
 ## Open Questions
 
-- איזה tools תקבל [[chen]] כשתיווצר? (WebSearch + WebFetch כברירת מחדל, MCP חיפוש לפי הצורך?)
 - האם להגדיר את ראובן עצמו כ-agent נפרד או להישאר עם ברירת-המחדל מ-[[claude-md]]?
+- האם להוסיף בעתיד agent רביעי שמתמחה בפרסום (LinkedIn/Twitter/וכו') או להישאר ב-4 (ראובן + יעל + יובל + חן) ולהפעיל את הפרסום כסקיל?
 
 ## Session Log
 
@@ -28,3 +28,9 @@
 - **Decisions:** Yael IMAGE_NEEDED protocol הוסף כדי לחבר בין יעל ליובל. ראובן הוא היחיד שמשלב — שמירה על אחריות יחידה לכל agent.
 - **Notes / Caveats:** עדכון ב-Open Questions — נסגרה שאלת tools של יובל. נשארה שאלת tools של חן.
 - **Related:** [[yuval]], [[yael]], [[claude-md]], [[reuven]], [[skills-directory]], [[yuval-and-gpt-image-gen]]
+
+### 2026-05-13 — chen.md נוצר ופועל [shipped]
+- **What was done:** נכתב `chen.md` עם `tools: WebSearch, WebFetch, Read, Write, Edit, Glob, Grep` (ללא Bash, ללא Agent — נאכף ברמת frontmatter). description עם 3 example blocks (חיפוש טרי, cache hit, נושא דינמי). System prompt בעברית עם workflow בן 8 שלבים (intent → memory check → search → filter → fetch → save → log → report). הפלט שלה: קובץ ב-`Content/<YYYY-MM-DD>-<slug>.md` עם header מובנה (Source/Retrieved/Quality/Original language).
+- **Decisions:** **`WebSearch`/`WebFetch` במקום Tavily/Perplexity** — שינוי ארכיטקטוני שמבטל את התלות במפתח API חיצוני. **זיכרון חיפושים ב-Markdown flat file** (`chen/Memory/searches.md`) ולא DB — שמירה על פשטות, human-readable, Grep מהיר מספיק לסקייל הנוכחי. **לא Bash ולא Agent** — חן stateless ב-execution, מדווחת לראובן וזהו.
+- **Notes / Caveats:** ה-Open Question של "איזה tools תקבל chen" נסגרה — WebSearch/WebFetch כצפוי. נסגרה גם שאלת ה-API החיצוני (אין כזה). שלושת ה-agents כעת פעילים — ראובן הוא היחיד שאין לו agent ייעודי, רק `CLAUDE.md`.
+- **Related:** [[chen]], [[chen-agent-creation]], [[claude-md]], [[reuven]], [[environment-config]]
