@@ -33,3 +33,9 @@
   - הכפילות בין הסקיל `itay-zerem-writing` (גלובלי) לבין ה-agent הזה (פרויקטי) לא מוכרעת — `itay-zerem-writing` הוא קול ספציפי לאיתי, יעל היא תפקיד כללי בצוות. ראובן יחליט במשימה ספציפית האם להפעיל את הסקיל בנוסף.
   - ה-routing מ-ראובן ליעל מתבסס על trigger keywords ב-CLAUDE.md — אם ראובן לא מזהה — יש לבקש במפורש "תעבירי ליעל".
 - **Related:** [[reuven]], [[chen]], [[yuval]], [[claude-md]], [[agents-directory]], [[yael-agent-creation]]
+
+### 2026-05-13 — הוספת IMAGE_NEEDED protocol [shipped]
+- **What was done:** נוסף ל-system prompt של יעל שלב 3.5 — בזיהוי מקומות לתמונה, מציבה `{{IMAGE_NEEDED: "תיאור..."}}` placeholders ב-MD וב-HTML באותו מקום. בשלב 5 (סיכום) מצטטת את כל ה-placeholders ברשימה ממוספרת לראובן, כדי שהוא יוכל לזמן את [[yuval]] לכל אחד בנפרד. עודכן גם סעיף "גבולות" — יעל לא יוצרת תמונות בעצמה.
+- **Decisions:** Yael מסמנת בלבד, יובל מייצר בלבד, ראובן משלב. הפרדת אחריות מוחלטת — כל agent בעל תפקיד יחיד וברור.
+- **Notes / Caveats:** ה-placeholder format הוא `{{IMAGE_NEEDED: "..."}}` בדיוק — שינוי לפורמט שובר את ה-find/replace של ראובן.
+- **Related:** [[yuval]], [[reuven]], [[claude-md]], [[yuval-and-gpt-image-gen]]
